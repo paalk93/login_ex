@@ -17,6 +17,12 @@ defmodule LoginExWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/my_profile", UserController, :my_profile
+    resources "/users", UserController
+
+    get "/sign-in", SessionController, :new
+    post "/sign-in", SessionController, :create
+    delete "/sign-out", SessionController, :delete
   end
 
   # Other scopes may use custom stacks.

@@ -9,3 +9,21 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+{:ok, _user} = LoginEx.Accounts.create_user(%{
+  username: "admin1",
+  encrypted_password: "pwadmin1",
+  is_admin: true
+})
+
+{:ok, _user} = LoginEx.Accounts.create_user(%{
+  username: "user1",
+  encrypted_password: "pwuser1",
+  is_admin: false
+})
+
+{:ok, _user} = LoginEx.Accounts.create_user(%{
+  username: "user2",
+  encrypted_password: "pwuser2",
+  is_admin: false
+})
