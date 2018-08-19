@@ -1,24 +1,22 @@
 defmodule LoginEx.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Comeonin.Pbkdf2
+  alias LoginEx.Accounts
+  alias LoginEx.Accounts.Login
   alias LoginEx.Accounts.User
 
-
   schema "users" do
-    field :encrypted_password, :string
-    field :username, :string
-    field :is_admin, :boolean, default: false
-
+    field :name, :string
+    field :adress, :string
+    field :phone, :string
+    belongs_to :login, LoginEx.Accounts.Login
     timestamps()
   end
 
   @doc false
-  def changeset(%User{} = user, attrs) do
+  def changeset(user, attrs \\ %{}) do
     user
-    |> cast(attrs, [:username, :encrypted_password, :is_admin])
-    |> unique_constraint(:username)
-    |> validate_required([:username, :encrypted_password])
-    |> update_change(:encrypted_password, &Pbkdf2.hashpwsalt/1)
+    |> cast(attrs, [:name, :adress, :phone])
+    |> validate_required([:name, :adress, :phone])
   end
 end

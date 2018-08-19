@@ -1,19 +1,19 @@
 defmodule LoginExWeb.Helpers.Auth do
   alias LoginEx.Accounts
   def signed_in?(conn) do
-    user_id = Plug.Conn.get_session(conn, :current_user_id)
-    if user_id, do: !!LoginEx.Repo.get(LoginEx.Accounts.User, user_id)
+    login_id = Plug.Conn.get_session(conn, :current_login_id)
+    if login_id, do: !!LoginEx.Repo.get(LoginEx.Accounts.Login, login_id)
   end
 
-  def my_user(conn) do
-    user_id = Plug.Conn.get_session(conn, :current_user_id)
-    user = Accounts.get_user!(user_id)
+  def my_login(conn) do
+    login_id = Plug.Conn.get_session(conn, :current_login_id)
+    login = Accounts.get_login!(login_id)
   end
 
 
   def is_admin?(conn) do
-      user_id = Plug.Conn.get_session(conn, :current_user_id)
-      user = Accounts.get_user!(user_id)
-    if user.is_admin == true, do: !!LoginEx.Repo.get(LoginEx.Accounts.User, user_id)
+      login_id = Plug.Conn.get_session(conn, :current_login_id)
+      login = Accounts.get_login!(login_id)
+    if login.is_admin == true, do: !!LoginEx.Repo.get(LoginEx.Accounts.Login, login_id)
   end
 end

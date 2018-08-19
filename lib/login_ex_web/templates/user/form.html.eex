@@ -17,14 +17,25 @@
     <%= error_tag f, :encrypted_password %>
   </div>
 
-<%= if is_admin?(@conn) do %>
-  <div class="form-group">
-    <%= label f, :admin, class: "control-label" %>
-    <%= text_input f, :is_admin, class: "form-control" %>
-    <%= error_tag f, :is_admin %>
-  </div>
-<% end %>
+  <%= inputs_for f, :user, fn p -> %>
+    <div class="form-group">
+      <%= label p, :name, class: "control-label" %>
+      <%= text_input p, :name, class: "form-control" %>
+      <%= error_tag p, :name %>
+    </div>
+    <div class="form-group">
+      <%= label p, :adress, class: "control-label" %>
+      <%= text_input p, :adress, class: "form-control" %>
+      <%= error_tag p, :adress %>
+    </div>
+    <div class="form-group">
+      <%= label p, :phone, class: "control-label" %>
+      <%= text_input p, :phone, class: "form-control" %>
+      <%= error_tag p, :phone %>
+    </div>
+  <% end %>
+
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
-<% end %>
+  <% end %>

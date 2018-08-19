@@ -8,11 +8,11 @@ defmodule LoginExWeb.SessionController do
   end
 
   def create(conn, %{"session" => auth_params}) do
-    user = Accounts.get_by_username(auth_params["username"])
-    case Comeonin.Pbkdf2.check_pass(user, auth_params["password"]) do
-      {:ok, user} ->
+    login = Accounts.get_by_username(auth_params["username"])
+    case Comeonin.Pbkdf2.check_pass(login, auth_params["password"]) do
+      {:ok, login} ->
         conn
-        |> put_session(:current_user_id, user.id)
+        |> put_session(:current_login_id, login.id)
         |> put_flash(:info, "Signed in successfully")
         |> redirect(to: page_path(conn, :index))
       {:error, _} ->
@@ -24,7 +24,7 @@ defmodule LoginExWeb.SessionController do
 
   def delete(conn, _params) do
     conn
-    |> delete_session(:current_user_id)
+    |> delete_session(:current_login_id)
     |> put_flash(:info, "Signed out successfully.")
     |> redirect(to: page_path(conn, :index))
   end

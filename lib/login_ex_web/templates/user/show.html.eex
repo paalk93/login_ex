@@ -4,15 +4,27 @@
 
   <li>
     <strong>Username:</strong>
-    <%= @user.username %>
+    <%= @login.username %>
   </li>
 
   <li>
     <strong>Encrypted password:</strong>
-    <%= @user.encrypted_password %>
+    <%= @login.encrypted_password %>
   </li>
 
+  <li>
+    <strong>Name:</strong>
+    <%= @login.user.name %>
+  </li>
+  <li>
+    <strong>Adress:</strong>
+    <%= @login.user.adress %>
+  </li>
+  <li>
+    <strong>Phone:</strong>
+    <%= @login.user.phone %>
+  </li>
 </ul>
 
-<span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
+<span><%= link "Edit", to: user_path(@conn, :edit, @login) %></span>
 <span><%= link "Back", to: page_path(@conn, :index) %></span>
